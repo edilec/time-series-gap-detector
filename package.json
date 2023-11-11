@@ -1,13 +1,16 @@
 {
   "name": "time-series-gap-detector",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Find missing or late windows in time-series telemetry exports.",
   "type": "module",
   "engines": {
     "node": ">=22"
   },
+  "bin": { "time-series-gap-detector": "bin/time-series-gap-detector.mjs" },
   "scripts": {
-    "test": "node --test"
+    "lint": "node --check src/index.mjs && node --check src/cli.mjs && node --check src/json-keys.mjs && node --check bin/time-series-gap-detector.mjs",
+    "test": "node --test",
+    "check": "npm run lint && npm test"
   },
   "license": "MIT",
   "repository": {

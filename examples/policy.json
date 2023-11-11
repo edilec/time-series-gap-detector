@@ -1,0 +1,1 @@
+{"schemaVersion":"1","asOf":"2026-03-08T10:00:00Z","devices":[{"id":"synthetic-device","timeZone":"America/New_York","cadenceMinutes":60,"lateGraceMinutes":30,"windowStart":"2026-03-08T06:00:00Z","windowEnd":"2026-03-08T08:00:00Z"}]}

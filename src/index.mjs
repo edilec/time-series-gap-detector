@@ -3,7 +3,7 @@ export const LIMITS=Object.freeze({policyBytes:65536,recordsBytes:1048576,device
 export const RULES=Object.freeze({'policy-invalid':'warning','records-invalid':'warning','records-incomplete':'warning','device-unknown':'warning','pending-gap':'warning','limit-exceeded':'warning','input-unreadable':'warning','permanent-gap':'error','duplicate-record':'error','out-of-order':'error','off-cadence':'error','late-record':'error'});
 const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const only=(x,keys)=>Object.keys(x).every(k=>keys.includes(k));
-const slug=x=>typeof x==='string'&&/^[a-z][a-z0-9-]{0,127}$/.test(x);
+const slug=x=>typeof x==='string'&&x.trim().length>0&&x.length<=256&&!/[\u0000-\u001f\u007f-\u009f\u2028\u2029\p{Cf}]/u.test(x);
 const instant=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(x)&&Number.isFinite(Date.parse(x))&&new Date(x).toISOString().slice(0,19)===x.slice(0,19);
 const cmp=(a,b)=>a<b?-1:a>b?1:0;
 function timezone(x){if(typeof x!=='string'||x.length>100)return false;try{new Intl.DateTimeFormat('en-US',{timeZone:x});return true;}catch{return false;}}

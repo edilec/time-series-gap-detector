@@ -77,3 +77,10 @@ test('CLI confinement, escaped duplicate keys and byte N/N+1',()=>{
 });
 
 test('severity table is pinned',()=>{assert.deepEqual(RULES,{'policy-invalid':'warning','records-invalid':'warning','records-incomplete':'warning','device-unknown':'warning','pending-gap':'warning','limit-exceeded':'warning','input-unreadable':'warning','permanent-gap':'error','duplicate-record':'error','out-of-order':'error','off-cadence':'error','late-record':'error'});});
+
+test('opaque uppercase device ID is valid with exact safe length boundary',()=>{
+  const renamed=id=>({policy:{...policy,devices:[{...device,id}]},records:{...records,records:records.records.map(r=>({...r,deviceId:id}))}});
+  const upper=renamed('GW-001');assert.equal(check(upper.records,upper.policy).status,'pass');
+  const n=renamed('G'.repeat(256));assert.equal(check(n.records,n.policy).status,'pass');
+  const n1=renamed('G'.repeat(257));assert.equal(check(n1.records,n1.policy).status,'incomplete');
+});
